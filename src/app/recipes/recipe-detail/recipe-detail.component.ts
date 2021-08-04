@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
@@ -14,9 +15,10 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
 
   constructor(
-    private recipeService: RecipeService, 
+    private recipeService: RecipeService,
+    private alertService: AlertService, 
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class RecipeDetailComponent implements OnInit {
 
   onAddToShoppingList() {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+    this.alertService.addAlert({type: 'info', title: 'Done!', message: 'Ingredients added to shopping list!'});
   }
 
   onEditRecipe() {
@@ -37,5 +40,6 @@ export class RecipeDetailComponent implements OnInit {
   onDeleteRecipe() {
     this.recipeService.deleteRecipe(this.id);
     this.router.navigate(['../'], {relativeTo: this.route});
+    this.alertService.addAlert({type: 'warning', title: 'Warning!', message: 'Recipe has been deleted!'});
   }
 }

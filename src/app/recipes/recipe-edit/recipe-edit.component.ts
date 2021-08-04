@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 import { RecipeService } from '../recipe.service';
 // import { Recipe } from '../recipe.model';
@@ -18,7 +19,8 @@ export class RecipeEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private alertService: AlertService
   ) { }
 
   get ingredientsControls() {
@@ -46,9 +48,11 @@ export class RecipeEditComponent implements OnInit {
     if (this.editMode) {
       // this.recipeService.updateRecipe(this.id, newRecipe);
       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      this.alertService.addAlert({type: 'success', title: 'Updated!', message: 'Recipe has been updated.'});
     } else {
       // this.recipeService.addRecipe(newRecipe);
       this.recipeService.addRecipe(this.recipeForm.value);
+      this.alertService.addAlert({type: 'success', title: 'Added!', message: 'A new recipe has been added!'});
     }
     this.router.navigate(['../'], {relativeTo: this.route});
   }

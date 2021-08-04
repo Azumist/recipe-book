@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
@@ -22,7 +23,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedItemIndex: number;
   editedItem: Ingredient;
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.subscription = this.shoppingListService.startedEditing.subscribe(
@@ -47,9 +50,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
       this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
+      this.alertService.addAlert({type: 'success', title: 'Updated!', message: 'Ingredient updated successfully.'});
     }
     else {
       this.shoppingListService.addIngredient(newIngredient);
+      this.alertService.addAlert({type: 'success', title: 'Saved!', message: 'Ingredient saved successfully.'});
     }
     this.editMode = false;
     form.reset();
@@ -63,5 +68,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onDelete() {
     this.onClear();
     this.shoppingListService.deleteIngredient(this.editedItemIndex);
+    this.alertService.addAlert({type: 'warning', title: 'Deleted.', message: 'Ingredient deleted successfully.'});
   }
 }
