@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { AlertService } from "../shared/alert/alert.service";
+import { DataStorageService } from "../shared/data-storage.service";
 import { AuthService } from "./auth.service";
 
 @Component({
@@ -16,8 +17,20 @@ export class AuthComponent {
   constructor(
     private authService: AuthService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private dataStorageService: DataStorageService
   ) {}
+
+  initialFetch() {
+    this.dataStorageService.fetchRecipes()
+    .subscribe(recipes => {
+      // this.alertService.addAlert(
+      //   {
+      //     type: 'success',
+      //     message: 'Initial fetch succeed!'
+      //   });
+    }, error => this.alertService.addAlert(error));
+  }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -40,6 +53,7 @@ export class AuthComponent {
           }
         );
         this.router.navigate(['/recipes']);
+        this.initialFetch();
       }, error => {
         this.isLoading = false;
         this.alertService.addAlert(error);
@@ -57,6 +71,7 @@ export class AuthComponent {
           }
         );
         this.router.navigate(['/recipes']);
+        this.initialFetch();
       }, error => {
         this.isLoading = false;
         this.alertService.addAlert(error);

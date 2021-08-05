@@ -8,20 +8,6 @@ import { Recipe } from './recipe.model';
 @Injectable()
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
-  // private recipes: Recipe[] = [
-  //   new Recipe(
-  //     'Tasty Schnitzel',
-  //     'A super tasty schnitzel - just awesome!',
-  //     'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
-  //     [new Ingredient('Meat', 1), new Ingredient('French Fries', 20)]
-  //   ),
-  //   new Recipe(
-  //     'Big Fat Burger',
-  //     'What else you need to say?',
-  //     'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
-  //     [new Ingredient('Buns', 2), new Ingredient('Meat', 2)]
-  //   ),
-  // ];
   private recipes: Recipe[] = [];
 
   constructor(private shoppingListService: ShoppingListService) {}
@@ -44,7 +30,17 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    this.shoppingListService.addIngredients(ingredients);
+    const newIngredients = ingredients.filter(ing => {
+      const foundIngIndex = this.shoppingListService.isIngredientOnList(ing.name);
+      if (foundIngIndex !== -1) {
+        const oldIng = this.shoppingListService.getIngredient(foundIngIndex);
+        const newIng = new Ingredient(ing.name, oldIng.amount + ing.amount);
+        this.shoppingListService.updateIngredient(foundIngIndex, newIng);
+        return false;
+      }
+      return true;
+    });
+    this.shoppingListService.addIngredients(newIngredients);
   }
 
   addRecipe(recipe: Recipe) {

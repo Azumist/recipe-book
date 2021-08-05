@@ -50,11 +50,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
       this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
-      this.alertService.addAlert({type: 'success', title: 'Updated!', message: 'Ingredient updated successfully.'});
+      this.alertService.addAlert({type: 'success', message: 'Ingredient updated successfully.'});
     }
     else {
       this.shoppingListService.addIngredient(newIngredient);
-      this.alertService.addAlert({type: 'success', title: 'Saved!', message: 'Ingredient saved successfully.'});
+      this.alertService.addAlert({type: 'success', message: 'Ingredient saved successfully.'});
     }
     this.editMode = false;
     form.reset();
@@ -68,6 +68,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onDelete() {
     this.onClear();
     this.shoppingListService.deleteIngredient(this.editedItemIndex);
-    this.alertService.addAlert({type: 'warning', title: 'Deleted.', message: 'Ingredient deleted successfully.'});
+    this.alertService.addAlert({type: 'info', message: 'Ingredient deleted successfully.'});
   }
 }
