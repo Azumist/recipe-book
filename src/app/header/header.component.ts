@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.alertService.addAlert(
         {
           type: 'success',
-          title: 'Success!',
+          // title: 'Success!',
           message: 'Recipes saved succesfully!'
         });
     }, error => this.alertService.addAlert(error));

@@ -27,6 +27,7 @@ export interface AuthResponseData {
 @Injectable({providedIn: 'root'})
 export class AuthService {
   user = new BehaviorSubject<User>(null);
+  private tokenExpirationTimer: any;
 
   constructor(
     private http: HttpClient,
@@ -81,6 +82,8 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
+    this.autoLogout(expiresIn * 1000);
+    localStorage.setItem('userSession', JSON.stringify(user));
   }
 
   signup(email: string, password: string) {
@@ -126,9 +129,40 @@ export class AuthService {
     );
   }
 
+  autoLogin() {
+    const userSession = JSON.parse(localStorage.getItem('userSession'));
+    if (!userSession) {
+      return;
+    }
+
+    const retrievedSession = new User(
+      userSession.email,
+      userSession.id,
+      userSession._token,
+      new Date(userSession._tokenExpirationDate)
+    );
+
+    if (retrievedSession.token) {
+      this.user.next(retrievedSession);
+      const expirationDuration = new Date(userSession._tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
+    }
+  }
+
   logout() {
     this.user.next(null);
     this.alertService.addAlert({type: 'info', title: '', message: 'Logged out succesfully.'});
     this.router.navigate(['/auth']);
+    localStorage.removeItem('userSession');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 }

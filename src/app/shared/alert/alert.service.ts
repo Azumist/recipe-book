@@ -9,7 +9,6 @@ export interface Alert {
 
 @Injectable()
 export class AlertService {
-    // alertAppeared = new Subject<Alert>();
     alertsChanged = new Subject<Alert[]>();
     private alertList: Alert[] = [];
 
