@@ -29,3 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Helpful
 
 https://medium.com/ngconf/ultimate-prettier-angular-cheatsheet-777c9515f4fb
+
+## Project
+
+"strictNullChecks" in `tsconfig.json` must be set to `false` to enable proper authentication

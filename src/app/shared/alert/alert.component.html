@@ -19,6 +19,6 @@
     >
       <span aria-hidden="true">&times;</span>
     </button>
-    <strong>{{ alert.title }}</strong> {{ alert.message }}
+    <strong>{{ alert.title ? alert.title : null }}</strong> {{ alert.message }}
   </div>
 </div>
