@@ -36,7 +36,6 @@ export class AuthComponent {
         // console.log(response);
         this.alertService.addAlert({
             type: 'success',
-            title: 'Success!',
             message: 'Logged in succesfully.'
           }
         );
@@ -54,7 +53,6 @@ export class AuthComponent {
         this.alertService.addAlert(
           {
             type: 'success',
-            title: 'Success!',
             message: 'Account created succesfully.'
           }
         );

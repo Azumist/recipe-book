@@ -1,0 +1,18 @@
+.app-recipe-list {
+  scrollbar-width: thin;
+  scrollbar-color: #e95420 #fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #e95420;
+  border-radius: 20px;
+  border: none;
+}

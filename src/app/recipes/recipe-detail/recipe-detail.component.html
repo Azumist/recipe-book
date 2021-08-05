@@ -13,7 +13,7 @@
     <h2>{{ recipe.name }}</h2>
   </div>
 </div>
-<div class="row">
+<div class="row app-dropdown-row">
   <div class="col-xs-12">
     <div appDropdown class="btn-group">
       <button type="button" class="btn btn-primary dropdown-toggle">
@@ -30,10 +30,15 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">{{ recipe.description }}</div>
+  <div class="col-xs-12">
+    <p style="white-space: pre-line;">
+      {{ recipe.description }}
+    </p>
+  </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
+    <h3>Ingredients needed</h3>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
         {{ ingredient.name }} - {{ ingredient.amount }}

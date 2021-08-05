@@ -3,8 +3,8 @@
     <button class="btn btn-success" (click)="onNewRecipe()">New Recipe</button>
   </div>
 </div>
-<hr />
-<div class="row">
+<hr>
+<div class="row app-recipe-list" style="overflow-y:auto; max-height: 70vh;">
   <div class="col-xs-12">
     <app-recipe-item
       *ngFor="let recipeElem of recipes; let i = index"
@@ -13,4 +13,4 @@
     ></app-recipe-item>
   </div>
 </div>
-<hr>
+<hr class="visible-sm">

@@ -30,7 +30,7 @@ export class RecipeDetailComponent implements OnInit {
 
   onAddToShoppingList() {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
-    this.alertService.addAlert({type: 'info', title: 'Done!', message: 'Ingredients added to shopping list!'});
+    this.alertService.addAlert({type: 'info', message: 'Ingredients added to shopping list.'});
   }
 
   onEditRecipe() {
@@ -40,6 +40,6 @@ export class RecipeDetailComponent implements OnInit {
   onDeleteRecipe() {
     this.recipeService.deleteRecipe(this.id);
     this.router.navigate(['../'], {relativeTo: this.route});
-    this.alertService.addAlert({type: 'warning', title: 'Warning!', message: 'Recipe has been deleted!'});
+    this.alertService.addAlert({type: 'info', message: 'Recipe has been deleted.'});
   }
 }
