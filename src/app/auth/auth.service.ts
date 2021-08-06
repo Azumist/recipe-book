@@ -3,8 +3,9 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import { AlertService } from "../shared/alert/alert.service";
+import { environment } from "src/environments/environment";
 
+import { AlertService } from "../shared/alert/alert.service";
 import { User } from "./user.model";
 
 // --- FIREBASE DOCS ---
@@ -88,7 +89,7 @@ export class AuthService {
 
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
-    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAK6qIEYTVH5YCL8VikwMzLxyIeiLD2r6o',
+    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApiKey}`,
     {
       email: email,
       password: password,
@@ -109,7 +110,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<AuthResponseData>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAK6qIEYTVH5YCL8VikwMzLxyIeiLD2r6o',
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseApiKey}`,
       {
         email: email,
         password: password,

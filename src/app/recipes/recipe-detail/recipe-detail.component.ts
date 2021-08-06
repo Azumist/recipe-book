@@ -29,8 +29,13 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onAddToShoppingList() {
-    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
-    this.alertService.addAlert({type: 'info', message: 'Ingredients added to shopping list.'});
+    if (this.recipe.ingredients) {
+      this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+      this.alertService.addAlert({type: 'info', message: 'Ingredients added to shopping list.'});
+    }
+    else {
+      this.alertService.addAlert({type: 'warning', message: 'There aren\'t any ingredients on this recipe yet!'});
+    }
   }
 
   onEditRecipe() {

@@ -30,17 +30,20 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    const newIngredients = ingredients.filter(ing => {
-      const foundIngIndex = this.shoppingListService.isIngredientOnList(ing.name);
-      if (foundIngIndex !== -1) {
-        const oldIng = this.shoppingListService.getIngredient(foundIngIndex);
-        const newIng = new Ingredient(ing.name, oldIng.amount + ing.amount);
-        this.shoppingListService.updateIngredient(foundIngIndex, newIng);
-        return false;
-      }
-      return true;
-    });
-    this.shoppingListService.addIngredients(newIngredients);
+    // also checked in the recipe detail component, but here as well just in case
+    if (ingredients) {
+      const newIngredients = ingredients.filter(ing => {
+        const foundIngIndex = this.shoppingListService.isIngredientOnList(ing.name);
+        if (foundIngIndex !== -1) {
+          const oldIng = this.shoppingListService.getIngredient(foundIngIndex);
+          const newIng = new Ingredient(ing.name, oldIng.amount + ing.amount);
+          this.shoppingListService.updateIngredient(foundIngIndex, newIng);
+          return false;
+        }
+        return true;
+      });
+      this.shoppingListService.addIngredients(newIngredients);
+    }
   }
 
   addRecipe(recipe: Recipe) {
