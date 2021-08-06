@@ -15,7 +15,7 @@
 </div>
 <div class="row app-dropdown-row">
   <div class="col-xs-12">
-    <div appDropdown class="btn-group">
+    <div class="btn-group" appDropdown>
       <button type="button" class="btn btn-primary dropdown-toggle">
         Manage recipe <span class="caret"></span>
       </button>
@@ -39,7 +39,10 @@
 <div class="row">
   <div class="col-xs-12">
     <h3>Ingredients needed</h3>
-    <ul class="list-group">
+    <h4 
+      class="text-muted text-center"
+      *ngIf="!recipe.ingredients">No ingredients provided</h4>
+    <ul class="list-group" *ngIf="recipe.ingredients">
       <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
         <i class="fa fa-shopping-cart"></i>&nbsp;
         {{ ingredient.name }} ({{ ingredient.amount }})
