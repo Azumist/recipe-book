@@ -18,9 +18,9 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AlertService } from './shared/alert/alert.service';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
-import { DropdownDirective } from './shared/dropdown.directive';
+// import { DropdownDirective } from './shared/dropdown.directive';
 
-import { ShortenPipe } from './shared/shorten.pipe';
+// import { ShortenPipe } from './shared/shorten.pipe';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
