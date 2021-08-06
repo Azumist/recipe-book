@@ -7,10 +7,7 @@ import { HeaderComponent } from './header/header.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-
-import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -24,8 +21,8 @@ import { AuthModule } from './auth/auth.module';
     AppRoutingModule,
     SharedModule,
     // RecipesModule, (is now lazy loaded)
-    ShoppingListModule,
-    AuthModule,
+    // ShoppingListModule, (is now lazy loaded)
+    // AuthModule, (is now lazy loaded)
     CoreModule,
   ],
   bootstrap: [AppComponent],
