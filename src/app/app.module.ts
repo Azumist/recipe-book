@@ -5,8 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { AuthComponent } from './auth/auth.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,14 +15,13 @@ import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AlertService } from './shared/alert/alert.service';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
     AuthComponent,
   ],
   imports: [
@@ -35,6 +32,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     AppRoutingModule,
     SharedModule,
     RecipesModule,
+    ShoppingListModule
   ],
   providers: [
     ShoppingListService,
