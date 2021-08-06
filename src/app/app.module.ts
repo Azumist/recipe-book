@@ -11,30 +11,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipesModule } from './recipes/recipes.module';
 import { SharedModule } from './shared/shared.module';
 
-// import { RecipeService } from './recipes/recipe.service';
-// import { ShoppingListService } from './shopping-list/shopping-list.service';
-// import { AlertService } from './shared/alert/alert.service';
-// import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { CoreModule } from './core.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    AuthComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
     RecipesModule,
     ShoppingListModule,
-    CoreModule
+    AuthModule,
+    CoreModule,
   ],
   bootstrap: [AppComponent],
 })
